@@ -265,10 +265,10 @@ driver.get(start_url)
 product_links = []
 ranking=[]
 lazy_loading()
-fetch_product_links_and_ranks()
-pagination()
+fetch_product_links_and_ranks()        # fetching links from first page
+pagination()                           # going to second page
 lazy_loading()
-fetch_product_links_and_ranks()
+fetch_product_links_and_ranks()        # fetching links from second page
 
 
 # Creating a dictionary of the required columns
