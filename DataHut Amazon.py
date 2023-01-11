@@ -63,7 +63,7 @@ def extract_content(url):
 
 
 # Function to extract product name
-def product_name(soup):
+def extract_product_name(soup):
     try:
         name_of_product = soup.find('div', attrs={"id": "titleSection"}).text.strip()
         data['product name'].iloc[product] = name_of_product
@@ -74,7 +74,7 @@ def product_name(soup):
 
 
 # Function to extract brand name
-def brand_data(soup):
+def extract_brand(soup):
     try:
         brand = soup.find('a', attrs={"id": "bylineInfo"}).text.split(':')[1].strip()  #one location where brand data could be found
         data['brand'].iloc[product] = brand
@@ -89,7 +89,7 @@ def brand_data(soup):
 
 
 # Function to extract price
-def price_data(soup):
+def extract_price(soup):
     try:
         price = soup.find('span', attrs={"class": "a-price a-text-price a-size-medium apexPriceToPay"}).text.split('$')[
             -1]
@@ -101,7 +101,7 @@ def price_data(soup):
 
 
 # Function to extract size
-def size_data(soup):
+def extract_size(soup):
     try:
         size = soup.find('span', attrs={"id": "inline-twister-expanded-dimension-text-size_name"}).text.strip()
         data['size'].iloc[product] = size
@@ -112,7 +112,7 @@ def size_data(soup):
 
 
 # Function to extract star rating
-def star_data(soup):
+def extract_star_rating(soup):
     try:
         star = soup.find_all('i', attrs={"class": "a-icon a-icon-star a-star-4-5"})[0].text.split(' ')[0]
         if star == '':
@@ -133,7 +133,7 @@ def star_data(soup):
 
 
 # Function to extract number of ratings
-def num_of_ratings(soup):
+def extract_num_of_ratings(soup):
     try:
         star = soup.find('span', attrs={"id": "acrCustomerReviewText"}).text.split(' ')[0]
         data['number of ratings'].iloc[product] = star
@@ -144,7 +144,7 @@ def num_of_ratings(soup):
 
 
 # Function to extract color
-def color_data(soup):
+def extract_color(soup):
     try:
         color = soup.find('tr', attrs={'class': 'a-spacing-small po-color'}).text.strip().split('  ')[1].strip()
         data['color'].iloc[product] = color
@@ -155,7 +155,7 @@ def color_data(soup):
 
 
 # Function to extract hardware interface
-def hardware_data(soup):
+def extract_hardware_interface(soup):
     try:
         hardware_interface = \
         soup.find('tr', attrs={"class": "a-spacing-small po-hardware_interface"}).text.strip().split('  ')[1].strip()
@@ -167,7 +167,7 @@ def hardware_data(soup):
 
 
 # Function to extract compatible devices
-def compatible_devices_data(soup):
+def extract_compatible_devices(soup):
     try:
         compatible_devices = \
         soup.find('tr', attrs={"class": "a-spacing-small po-compatible_devices"}).text.strip().split('  ')[1].strip()
@@ -179,7 +179,7 @@ def compatible_devices_data(soup):
 
 
 # Function to extract data transfer rate
-def data_transfer_rate_data(soup):
+def extract_data_transfer_rate(soup):
     try:
         data_transfer_rate = \
         soup.find('tr', attrs={"class": "a-spacing-small po-data_transfer_rate"}).text.strip().split('  ')[1].strip()
@@ -191,7 +191,7 @@ def data_transfer_rate_data(soup):
 
 
 # Function to extract mounting type
-def mounting_type_data(soup):
+def extract_mounting_type(soup):
     try:
         mounting_type = soup.find('tr', attrs={"class": "a-spacing-small po-mounting_type"}).text.strip().split('  ')[
             1].strip()
@@ -203,7 +203,7 @@ def mounting_type_data(soup):
 
 
 # Function to extract special features
-def special_feature_data(soup):
+def extract_special_features(soup):
     try:
         special_feature = \
         soup.find('tr', attrs={"class": "a-spacing-small po-special_feature"}).text.strip().split('  ')[1].strip()
@@ -215,7 +215,7 @@ def special_feature_data(soup):
 
 
 # Function to extract connectivity technology
-def connectivity_technology_data(soup):
+def extract_connectivity_technology(soup):
     try:
         connectivity_technology = \
         soup.find('tr', attrs={"class": "a-spacing-small po-connectivity_technology"}).text.strip().split('  ')[
@@ -228,7 +228,7 @@ def connectivity_technology_data(soup):
 
 
 # Function to extract connector type
-def connector_type_data(soup):
+def extract_connector_type(soup):
     try:
         connector_type = soup.find('tr', attrs={"class": "a-spacing-small po-connector_type"}).text.strip().split('  ')[
             1].strip()
@@ -240,7 +240,7 @@ def connector_type_data(soup):
 
 
 # Function to extract date first available
-def date_first_available_data(soup):
+def extract_date_first_available(soup):
     try:
         product_details_keys = soup.find_all('th', attrs={"class": "a-color-secondary a-size-base prodDetSectionEntry"})
         product_details_values = soup.find_all('td', attrs={"class": "a-size-base prodDetAttrValue"})
@@ -290,49 +290,49 @@ for product in range(len(data)):
     product_content = extract_content(product_url)
 
     # brands
-    brand_data(product_content)
+    extract_brand(product_content)
 
     # product_name
-    product_name(product_content)
+    extract_product_name(product_content)
 
     # price
-    price_data(product_content)
+    extract_price(product_content)
 
     # size
-    size_data(product_content)
+    extract_size(product_content)
 
     # star rating
-    star_data(product_content)
+    extract_star_rating(product_content)
 
     # number of ratings
-    num_of_ratings(product_content)
+    extract_num_of_ratings(product_content)
 
     # color
-    color_data(product_content)
+    extract_color(product_content)
 
     # hardware interface
-    hardware_data(product_content)
+    extract_hardware_interface(product_content)
 
     # compatible devices
-    compatible_devices_data(product_content)
+    extract_compatible_devices(product_content)
 
     # data transfer rate
-    data_transfer_rate_data(product_content)
+    extract_data_transfer_rate(product_content)
 
     # mounting type
-    mounting_type_data(product_content)
+    extract_mounting_type(product_content)
 
     # special features
-    special_feature_data(product_content)
+    extract_special_features(product_content)
 
     # connectivity technology
-    connectivity_technology_data(product_content)
+    extract_connectivity_technology(product_content)
 
     # connector type
-    connector_type_data(product_content)
+    extract_connector_type(product_content)
 
     # date first available
-    date_first_available_data(product_content)
+    extract_date_first_available(product_content)
 
 
 # saving the resultant dataframe as a csv file
