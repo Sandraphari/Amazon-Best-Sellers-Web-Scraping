@@ -114,22 +114,20 @@ def extract_size(soup):
 # Function to extract star rating
 def extract_star_rating(soup):
     try:
-        star = soup.find_all('i', attrs={"class": "a-icon a-icon-star a-star-4-5"})[0].text.split(' ')[0]
-        if star == '':
-            star = soup.find_all('i', attrs={"class": "a-icon a-icon-star a-star-4-5"})[1].text.split(' ')[0]
-        if star == '':
-            star = soup.find_all('i', attrs={"class": "a-icon a-icon-star a-star-5"})[1].text.split(' ')[0]
-        if star == '':
-            star = soup.find_all('i', attrs={"class": "a-icon a-icon-star a-star-5"})[0].text.split(' ')[0]
-        if star == '':
-            star = soup.find_all('i', attrs={"class": "a-icon a-icon-star a-star-5"})[1].text.split(' ')[0]
-        # these are the different locations in which star rating data possibly appears
-
-        data['star rating'].iloc[product] = star
-
+        star = None
+        for star_rating_locations in ['a-icon a-icon-star a-star-4-5', 'a-icon a-icon-star a-star-5']:
+            stars = soup.find_all('i', attrs={"class": star_rating_locations})
+            for i in range(len(stars)):
+                star = stars[i].text.split(' ')[0]
+                if star:
+                    break
+            if star:
+                break
+        
     except:
         star = 'Star rating data not available'
-        data['star rating'].iloc[product] = star
+        
+    data['star rating'].iloc[product] = star   
 
 
 # Function to extract number of ratings
