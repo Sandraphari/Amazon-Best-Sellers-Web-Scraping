@@ -21,7 +21,7 @@ def delay():
 
 # Scrolling down the page in order to overcome Lazy Loading
 def lazy_loading():
-    element = driver.find_element(By.TAG_NAME, 'body')
+    element = driver.find_element(By.XPATH,'/html/body')
     count = 0
     while count < 20:
         element.send_keys(Keys.PAGE_DOWN)
