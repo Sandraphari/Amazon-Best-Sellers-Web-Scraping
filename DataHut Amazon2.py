@@ -21,22 +21,12 @@ def delay():
 
 # Scrolling down the page in order to overcome Lazy Loading
 def lazy_loading():
-    element = driver.find_element(By.XPATH,'/html/body')
+    element = driver.find_element(By.TAG_NAME, 'body')
     count = 0
     while count < 20:
         element.send_keys(Keys.PAGE_DOWN)
         delay()
         count += 1
-
-
-# Clicking the button to go to next page
-def pagination():
-    try:
-        driver.find_element(By.XPATH, "//li[@class='a-last']/a").click()
-        delay()
-
-    except:
-        pass
 
 
 # Function to fetch the product links of products
@@ -262,11 +252,11 @@ driver.get(start_url)
 # Fetching the product links of all items
 product_links = []
 ranking=[]
-lazy_loading()
-fetch_product_links_and_ranks()        # fetching links from first page
-pagination()                           # going to second page
-lazy_loading()
-fetch_product_links_and_ranks()        # fetching links from second page
+for page in range(1,3):               # to iterate over the 2 pages in which the products are divided into
+    start_url = f'https://www.amazon.com/Best-Sellers-Computers-Accessories/zgbs/pc/ref=zg_bs_pg_{page}?_encoding=UTF8&pg={page}'
+    driver.get(start_url)
+    lazy_loading()                     # to overcome lazy loading
+    fetch_product_links_and_ranks()    # to fetch the links to products  
 
 
 # Creating a dictionary of the required columns
