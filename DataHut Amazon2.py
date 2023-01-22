@@ -244,11 +244,6 @@ def extract_date_first_available(soup):
         data['date first available'].iloc[product] = date_first_available
 
 
-# Amazon Best Sellers website link
-start_url ='https://www.amazon.com/Best-Sellers-Computers-Accessories/zgbs/pc/ref=zg_bs_pg_1?_encoding=UTF8&pg=1'
-driver.get(start_url)
-
-
 # Fetching the product links of all items
 product_links = []
 ranking=[]
